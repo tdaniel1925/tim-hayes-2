@@ -1,6 +1,6 @@
 # BUILD-STATE.md — AudiaPro Progress Tracker
 
-## Current Status: STEP 1.2
+## Current Status: STEP 1.2 (Pending Supabase Setup)
 
 ## Progress
 
@@ -8,6 +8,7 @@
 |------|------|--------|------|------|
 | **AGENT 1: FOUNDATION** | | | | |
 | 1.1 | Project Scaffold | ✅ | ✅ | 2026-02-22 |
+| 1.2 | Database Schema & Migrations | 🔨 | ⬜ | 2026-02-22 |
 | 1.2 | Database Schema & Migrations | ⬜ | ⬜ | |
 | 1.3 | RLS Policies | ⬜ | ⬜ | |
 | 1.4 | Supabase Client Setup | ⬜ | ⬜ | |
@@ -59,5 +60,11 @@
 | | | | |
 
 ## Notes
+
+**Step 1.2 Status:**
+- ✅ Migration file created with all 6 tables, indexes, functions, and triggers
+- ⬜ **Awaiting:** Docker Desktop installation OR Supabase cloud project setup
+- ⬜ **Next:** Run `npx supabase start` (local) or `npx supabase link` (cloud) then `npx supabase db push`
+- See `supabase/README.md` for detailed setup instructions
 
 Status key: ⬜ Not started · 🔨 In progress · ✅ Passed · ❌ Failed · 🔄 Retrying
