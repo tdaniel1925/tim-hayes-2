@@ -144,6 +144,7 @@ describe('Auth - verifyAuth', () => {
       tenant_id: 'tenant-123',
       full_name: 'Test User',
       is_active: true,
+      tenants: { name: 'Test Tenant' },
     }
 
     const { createClient } = await import('@/lib/supabase/server')
@@ -173,6 +174,7 @@ describe('Auth - verifyAuth', () => {
       email: mockUser.email,
       role: mockUser.role,
       tenantId: mockUser.tenant_id,
+      tenantName: 'Test Tenant',
       fullName: mockUser.full_name,
       isActive: mockUser.is_active,
     })
