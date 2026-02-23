@@ -1,6 +1,6 @@
 interface StatusBadgeProps {
   status: string
-  type?: 'status' | 'plan'
+  type?: 'status' | 'plan' | 'job_status' | 'job_type'
 }
 
 const statusColors: Record<string, string> = {
@@ -15,11 +15,16 @@ const statusColors: Record<string, string> = {
   professional: 'bg-[#FF7F50]/10 text-[#FF7F50] border-[#FF7F50]/20',
   enterprise: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
 
-  // Processing status
-  pending: 'bg-gray-500/10 text-gray-400 border-gray-500/20',
+  // Job status
+  pending: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',
   processing: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
   completed: 'bg-green-500/10 text-green-400 border-green-500/20',
   failed: 'bg-red-500/10 text-red-400 border-red-500/20',
+
+  // Job types
+  full_pipeline: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
+  transcribe_only: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
+  analyze_only: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
 
   // Connection status
   connected: 'bg-green-500/10 text-green-400 border-green-500/20',
