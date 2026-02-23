@@ -54,7 +54,7 @@ export async function analyzeCall(config: AnalysisConfig): Promise<CallAnalysis>
 
     // Call Claude API
     const response = await anthropic.messages.create({
-      model: 'claude-3-5-sonnet-20241022',
+      model: 'claude-3-haiku-20240307',
       max_tokens: 2048,
       messages: [
         {
