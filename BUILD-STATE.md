@@ -22,7 +22,7 @@
 | CP2 | **CHECKPOINT 2: Auth** | ✅ | — | 2026-02-22 |
 | **AGENT 3: CORE API** | | | | |
 | 3.1 | Tenant CRUD API | ✅ | ✅ | 2026-02-22 |
-| 3.2 | PBX Connection CRUD API | ⬜ | ⬜ | |
+| 3.2 | PBX Connection CRUD API | ✅ | ✅ | 2026-02-22 |
 | 3.3 | Connection Test Endpoint | ⬜ | ⬜ | |
 | 3.4 | Webhook Handler | ⬜ | ⬜ | |
 | 3.5 | Calls API | ⬜ | ⬜ | |
