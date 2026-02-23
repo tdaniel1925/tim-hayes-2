@@ -1,6 +1,6 @@
 # BUILD-STATE.md — AudiaPro Progress Tracker
 
-## Current Status: CP2 (CHECKPOINT 2: Auth)
+## Current Status: Agent 5 - Step 5.1 (App Shell & Layout)
 
 ## Progress
 
@@ -36,7 +36,7 @@
 | 4.5 | Full Pipeline Integration | ✅ | ✅ | 2026-02-22 |
 | CP4 | **CHECKPOINT 4: Worker** | ✅ | — | 2026-02-22 |
 | **AGENT 5: UI** | | | | |
-| 5.1 | App Shell & Layout | ⬜ | ⬜ | |
+| 5.1 | App Shell & Layout | ✅ | ✅ | 2026-02-23 |
 | 5.2 | Super Admin: Tenants | ⬜ | ⬜ | |
 | 5.3 | Super Admin: Connections | ⬜ | ⬜ | |
 | 5.4 | Super Admin: Jobs | ⬜ | ⬜ | |
@@ -66,5 +66,15 @@
 - ✅ Storage buckets created: call-recordings, call-transcripts, call-analyses
 - ✅ API credentials configured in .env.local
 - ✅ Encryption key generated
+
+**Step 5.1 Complete:**
+- ✅ App shell components created (TopBar, AppShell, ProtectedLayoutClient)
+- ✅ Sidebar updated with collapse functionality
+- ✅ Mobile-responsive: sidebar hidden on <768px, collapsed on ≤1024px
+- ✅ Hamburger menu toggle in top bar
+- ✅ Smooth 200ms transitions
+- ✅ Dark-mode design system applied (#0F1117, #1A1D27, #FF7F50)
+- ✅ AuthUser type updated to include tenantName
+- ✅ Verification checklist created: scripts/verify-step-5-1.md
 
 Status key: ⬜ Not started · 🔨 In progress · ✅ Passed · ❌ Failed · 🔄 Retrying

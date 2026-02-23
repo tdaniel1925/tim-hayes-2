@@ -9,6 +9,7 @@ export interface AuthUser {
   email: string
   role: UserRole
   tenantId: string | null
+  tenantName: string | null
   fullName: string | null
   isActive: boolean
 }
@@ -34,10 +35,10 @@ export async function verifyAuth(allowedRoles?: UserRole[]): Promise<AuthUser> {
     createError(AUTH_ERRORS.SESSION_EXPIRED)
   }
 
-  // Get user details from our users table
+  // Get user details from our users table with tenant name
   const { data: user, error: userError } = await supabase
     .from('users')
-    .select('id, email, role, tenant_id, full_name, is_active')
+    .select('id, email, role, tenant_id, full_name, is_active, tenants(name)')
     .eq('id', authUser.id)
     .single()
 
@@ -57,11 +58,18 @@ export async function verifyAuth(allowedRoles?: UserRole[]): Promise<AuthUser> {
     }
   }
 
+  // Extract tenant name from the joined data
+  const tenantName =
+    user.tenants && typeof user.tenants === 'object' && 'name' in user.tenants
+      ? (user.tenants.name as string)
+      : null
+
   return {
     id: user.id,
     email: user.email,
     role: user.role,
     tenantId: user.tenant_id,
+    tenantName,
     fullName: user.full_name,
     isActive: user.is_active,
   }
