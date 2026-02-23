@@ -25,7 +25,7 @@
 | 3.2 | PBX Connection CRUD API | ✅ | ✅ | 2026-02-22 |
 | 3.3 | Connection Test Endpoint | ✅ | ✅ | 2026-02-22 |
 | 3.4 | Webhook Handler | ✅ | ✅ | 2026-02-22 |
-| 3.5 | Calls API | ⬜ | ⬜ | |
+| 3.5 | Calls API | ✅ | ✅ | 2026-02-22 |
 | 3.6 | Dashboard Stats API | ⬜ | ⬜ | |
 | CP3 | **CHECKPOINT 3: Core API** | ⬜ | — | |
 | **AGENT 4: WORKER** | | | | |
