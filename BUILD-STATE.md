@@ -1,6 +1,6 @@
 # BUILD-STATE.md — AudiaPro Progress Tracker
 
-## Current Status: Agent 5 - Step 5.6 (Client Dashboard: Calls List)
+## Current Status: Agent 5 - Step 5.7 (Client Dashboard: Call Detail)
 
 ## Progress
 
@@ -42,7 +42,7 @@
 | 5.4 | Super Admin: Jobs | ✅ | ✅ | 2026-02-23 |
 | 5.5 | Client Dashboard: Overview | ✅ | ✅ | 2026-02-23 |
 | 5.6 | Client Dashboard: Calls List | ✅ | ✅ | 2026-02-23 |
-| 5.7 | Client Dashboard: Call Detail | ⬜ | ⬜ | |
+| 5.7 | Client Dashboard: Call Detail | ✅ | ✅ | 2026-02-23 |
 | 5.8 | Admin Stats Dashboard | ⬜ | ⬜ | |
 | CP5 | **CHECKPOINT 5: UI** | ⬜ | — | |
 | **AGENT 6: POLISH & DEPLOY** | | | | |
