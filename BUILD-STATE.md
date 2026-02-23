@@ -1,6 +1,6 @@
 # BUILD-STATE.md — AudiaPro Progress Tracker
 
-## Current Status: AGENT 1 COMPLETE
+## Current Status: STEP 2.2
 
 ## Progress
 
@@ -13,6 +13,13 @@
 | 1.4 | Supabase Client Setup | ✅ | ✅ | 2026-02-22 |
 | 1.5 | Encryption & Error Utilities | ✅ | ✅ | 2026-02-22 |
 | CP1 | **CHECKPOINT 1: Foundation** | ✅ | — | 2026-02-22 |
+| **AGENT 2: AUTH** | | | | |
+| 2.1 | Supabase Auth + verifyAuth | ✅ | ✅ | 2026-02-22 |
+| 2.2 | Login Page | ⬜ | ⬜ | |
+| 2.3 | Protected Route Layout | ⬜ | ⬜ | |
+| 2.4 | Super Admin Seed Script | ⬜ | ⬜ | |
+| 2.5 | Role-Based Navigation | ⬜ | ⬜ | |
+| CP2 | **CHECKPOINT 2: Auth** | ⬜ | — | |
 | 1.2 | Database Schema & Migrations | ⬜ | ⬜ | |
 | 1.3 | RLS Policies | ⬜ | ⬜ | |
 | 1.4 | Supabase Client Setup | ⬜ | ⬜ | |
