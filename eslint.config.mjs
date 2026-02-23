@@ -23,7 +23,15 @@ const eslintConfig = [
       "**/*.spec.ts",
       "**/*.spec.tsx",
       "scripts/**",
+      "worker/**",
     ],
+  },
+  {
+    rules: {
+      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-require-imports": "warn",
+      "@next/next/no-html-link-for-pages": "warn",
+    },
   },
 ];
 

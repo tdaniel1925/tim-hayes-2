@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { Plus } from 'lucide-react'
 import { DataTable, Column, PaginationData } from '@/components/shared/data-table'
 import { StatusBadge } from '@/components/shared/status-badge'
@@ -17,6 +18,7 @@ interface Tenant {
 }
 
 export default function TenantsPage() {
+  const router = useRouter()
   const [tenants, setTenants] = useState<Tenant[]>([])
   const [pagination, setPagination] = useState<PaginationData>({
     page: 1,
@@ -144,8 +146,7 @@ export default function TenantsPage() {
 
   // Handle row click
   const handleRowClick = (tenant: Tenant) => {
-    // TODO: Navigate to tenant detail page
-    console.log('Clicked tenant:', tenant)
+    router.push(`/admin/tenants/${tenant.id}`)
   }
 
   return (
