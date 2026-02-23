@@ -29,7 +29,7 @@
 | 3.6 | Dashboard Stats API | ✅ | ✅ | 2026-02-22 |
 | CP3 | **CHECKPOINT 3: Core API** | ⬜ | — | |
 | **AGENT 4: WORKER** | | | | |
-| 4.1 | Worker Scaffold | ⬜ | ⬜ | |
+| 4.1 | Worker Scaffold | ✅ | ✅ | 2026-02-22 |
 | 4.2 | Recording Download Step | ⬜ | ⬜ | |
 | 4.3 | Transcription Step | ⬜ | ⬜ | |
 | 4.4 | AI Analysis Step | ⬜ | ⬜ | |
