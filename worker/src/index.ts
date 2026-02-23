@@ -78,29 +78,49 @@ async function claimAndProcessJob(): Promise<boolean> {
     console.log(`📋 Claimed job ${job.id} (attempt ${job.attempts}/${job.max_attempts})`)
 
     try {
-      // TODO: Process the job (Steps 4.2-4.5 will implement this)
-      // For now, just simulate processing
-      console.log(`   Processing job type: ${job.job_type}`)
-      console.log(`   CDR record: ${job.cdr_record_id}`)
-      console.log(`   Tenant: ${job.tenant_id}`)
+      // Execute the full pipeline
+      const { executePipeline } = await import('./pipeline')
 
-      // Simulate processing delay
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      const result = await executePipeline({
+        jobId: job.id,
+        cdrRecordId: job.cdr_record_id,
+        tenantId: job.tenant_id,
+        connectionId: job.metadata.connection_id,
+        recordingFilename: job.metadata.recording_filename,
+      })
 
-      // TODO: Replace with actual pipeline execution
-      console.log(`   ✅ Job ${job.id} completed (placeholder)`)
-
-      return true
+      if (result.success) {
+        console.log(`   ✅ Job ${job.id} completed successfully`)
+        return true
+      } else {
+        throw new Error(result.error || 'Pipeline failed')
+      }
     } catch (error) {
-      console.error(`   ❌ Job ${job.id} failed:`, error)
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      console.error(`   ❌ Job ${job.id} failed:`, errorMessage)
 
       // Check if we've exceeded max attempts
       if (job.attempts >= job.max_attempts) {
         console.error(`   Max retries (${job.max_attempts}) reached, marking as failed`)
-        // TODO: Mark job as failed using fail_job() function
+
+        // Mark job as permanently failed
+        await supabase.rpc('fail_job', {
+          p_job_id: job.id,
+          p_error: errorMessage,
+        })
       } else {
         console.log(`   Will retry (${job.attempts}/${job.max_attempts})`)
-        // TODO: Reset job to pending for retry
+
+        // Reset job to pending for retry
+        await supabase
+          .from('job_queue')
+          .update({
+            status: 'pending',
+            started_at: null,
+            error: errorMessage,
+            updated_at: new Date().toISOString(),
+          })
+          .eq('id', job.id)
       }
 
       return false

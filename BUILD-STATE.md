@@ -33,8 +33,8 @@
 | 4.2 | Recording Download Step | ✅ | ✅ | 2026-02-22 |
 | 4.3 | Transcription Step | ✅ | ✅ | 2026-02-22 |
 | 4.4 | AI Analysis Step | ✅ | ✅ | 2026-02-22 |
-| 4.5 | Full Pipeline Integration | ⬜ | ⬜ | |
-| CP4 | **CHECKPOINT 4: Worker** | ⬜ | — | |
+| 4.5 | Full Pipeline Integration | ✅ | ✅ | 2026-02-22 |
+| CP4 | **CHECKPOINT 4: Worker** | ✅ | — | 2026-02-22 |
 | **AGENT 5: UI** | | | | |
 | 5.1 | App Shell & Layout | ⬜ | ⬜ | |
 | 5.2 | Super Admin: Tenants | ⬜ | ⬜ | |
