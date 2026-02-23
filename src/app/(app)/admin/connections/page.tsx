@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Plus, Check, X, Loader2 } from 'lucide-react'
+import { toast } from 'sonner'
 import { DataTable, Column, PaginationData } from '@/components/shared/data-table'
 import { StatusDot } from '@/components/shared/status-dot'
 import { CreateConnectionModal } from './create-connection-modal'
@@ -65,6 +66,7 @@ export default function ConnectionsPage() {
       const data = await response.json()
 
       if (response.ok) {
+        toast.success('Connection test successful')
         setTestResults((prev) => new Map(prev).set(connectionId, { success: true, message: 'Connected' }))
         // Refresh connections to update last_connected_at
         fetchConnections(pagination.page, pagination.limit)
@@ -76,12 +78,15 @@ export default function ConnectionsPage() {
           })
         }, 3000)
       } else {
+        const errorMessage = data.error || 'Connection test failed'
+        toast.error(errorMessage)
         setTestResults((prev) => new Map(prev).set(connectionId, {
           success: false,
           message: data.error || 'Failed'
         }))
       }
     } catch (error) {
+      toast.error('Connection test failed')
       setTestResults((prev) => new Map(prev).set(connectionId, {
         success: false,
         message: 'Connection error'

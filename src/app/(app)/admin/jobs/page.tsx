@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { RotateCcw, Loader2, Play } from 'lucide-react'
+import { toast } from 'sonner'
 import { DataTable, Column, PaginationData } from '@/components/shared/data-table'
 import { StatusBadge } from '@/components/shared/status-badge'
 
@@ -60,13 +61,17 @@ export default function JobsPage() {
       })
 
       if (response.ok) {
+        toast.success('Job retry initiated')
         // Refresh jobs list
         fetchJobs(pagination.page, pagination.limit, statusFilter)
       } else {
         const data = await response.json()
+        const errorMessage = data.error || 'Failed to retry job'
+        toast.error(errorMessage)
         console.error('Failed to retry job:', data.error)
       }
     } catch (error) {
+      toast.error('Failed to retry job')
       console.error('Error retrying job:', error)
     } finally {
       setRetryingIds((prev) => {

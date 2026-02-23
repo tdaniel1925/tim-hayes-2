@@ -15,6 +15,7 @@ import {
   CheckCircle,
   Loader2,
 } from 'lucide-react'
+import { toast } from 'sonner'
 import { StatusBadge } from '@/components/shared/status-badge'
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts'
 
@@ -163,6 +164,8 @@ export default function CallDetailPage({ params }: { params: Promise<{ id: strin
 
   const handleCopyTranscript = () => {
     navigator.clipboard.writeText(transcript)
+      .then(() => toast.success('Transcript copied to clipboard'))
+      .catch(() => toast.error('Failed to copy transcript'))
   }
 
   // Format time as MM:SS

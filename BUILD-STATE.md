@@ -1,6 +1,6 @@
 # BUILD-STATE.md — AudiaPro Progress Tracker
 
-## Current Status: Agent 5 - Step 5.8 (Admin Stats Dashboard)
+## Current Status: Agent 6 - Step 6.1 (Error Pages & Edge Cases)
 
 ## Progress
 
@@ -44,9 +44,9 @@
 | 5.6 | Client Dashboard: Calls List | ✅ | ✅ | 2026-02-23 |
 | 5.7 | Client Dashboard: Call Detail | ✅ | ✅ | 2026-02-23 |
 | 5.8 | Admin Stats Dashboard | ✅ | ✅ | 2026-02-23 |
-| CP5 | **CHECKPOINT 5: UI** | ⬜ | — | |
+| CP5 | **CHECKPOINT 5: UI** | ✅ | — | 2026-02-23 |
 | **AGENT 6: POLISH & DEPLOY** | | | | |
-| 6.1 | Error Pages & Edge Cases | ⬜ | ⬜ | |
+| 6.1 | Error Pages & Edge Cases | ✅ | ✅ | 2026-02-23 |
 | 6.2 | Client User Management | ⬜ | ⬜ | |
 | 6.3 | Scheduled Email Reports | ⬜ | ⬜ | |
 | 6.4 | Deployment | ⬜ | ⬜ | |

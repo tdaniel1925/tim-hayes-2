@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { X, ChevronLeft, ChevronRight, Eye, EyeOff, Check, AlertCircle, Loader2, Copy } from 'lucide-react'
+import { toast } from 'sonner'
 
 interface Tenant {
   id: string
@@ -165,10 +166,13 @@ export function CreateConnectionModal({ isOpen, onClose, onSuccess }: CreateConn
       setWebhookURL(`${baseURL}/api/webhook/grandstream/${newConnection.id}`)
       setWebhookSecret(newConnection.webhook_secret || 'auto-generated')
 
+      toast.success('Connection created successfully')
       onSuccess(newConnection)
     } catch (error) {
       console.error('Error creating connection:', error)
-      setErrors({ submit: error instanceof Error ? error.message : 'Failed to create connection' })
+      const errorMessage = error instanceof Error ? error.message : 'Failed to create connection'
+      toast.error(errorMessage)
+      setErrors({ submit: errorMessage })
     } finally {
       setSaving(false)
     }
@@ -177,6 +181,7 @@ export function CreateConnectionModal({ isOpen, onClose, onSuccess }: CreateConn
   const copyToClipboard = async (text: string, type: 'url' | 'secret') => {
     try {
       await navigator.clipboard.writeText(text)
+      toast.success(`${type === 'url' ? 'Webhook URL' : 'Secret'} copied to clipboard`)
       if (type === 'url') {
         setCopiedURL(true)
         setTimeout(() => setCopiedURL(false), 2000)
@@ -186,6 +191,7 @@ export function CreateConnectionModal({ isOpen, onClose, onSuccess }: CreateConn
       }
     } catch (error) {
       console.error('Failed to copy:', error)
+      toast.error('Failed to copy to clipboard')
     }
   }
 

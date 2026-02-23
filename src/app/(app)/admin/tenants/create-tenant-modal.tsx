@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { X, Check, AlertCircle } from 'lucide-react'
+import { toast } from 'sonner'
 
 interface CreateTenantModalProps {
   isOpen: boolean
@@ -124,12 +125,15 @@ export function CreateTenantModal({ isOpen, onClose, onSuccess }: CreateTenantMo
       }
 
       const newTenant = await response.json()
+      toast.success('Tenant created successfully')
       onSuccess(newTenant)
       handleClose()
     } catch (error) {
       console.error('Error creating tenant:', error)
+      const errorMessage = error instanceof Error ? error.message : 'Failed to create tenant'
+      toast.error(errorMessage)
       setErrors({
-        submit: error instanceof Error ? error.message : 'Failed to create tenant',
+        submit: errorMessage,
       })
     } finally {
       setIsSubmitting(false)
