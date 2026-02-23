@@ -76,7 +76,7 @@ async function createSuperAdmin() {
     console.log(`  Password: ${password}`)
     console.log(`  Role: super_admin`)
     console.log()
-    console.log('You can now login at: http://localhost:3000/login')
+    console.log('You can now login at: http://localhost:2900/login')
   } catch (error) {
     console.error('❌ Unexpected error:', error)
   }

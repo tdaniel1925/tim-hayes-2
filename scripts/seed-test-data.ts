@@ -242,7 +242,7 @@ async function seedTestData() {
     console.log('  Password: acme123')
     console.log('  CDR Records: 5 sample calls with analysis')
     console.log()
-    console.log('Login at: http://localhost:3000/login')
+    console.log('Login at: http://localhost:2900/login')
   } catch (error) {
     console.error('❌ Unexpected error:', error)
   }

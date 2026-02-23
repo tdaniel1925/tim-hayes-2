@@ -37,6 +37,6 @@ npx playwright install chromium
 
 ## Notes
 
-- Tests expect the dev server to be running on `http://localhost:3000`
+- Tests expect the dev server to be running on `http://localhost:2900`
 - Full E2E tests that require authentication need a seeded database with test credentials
 - Current tests focus on UI structure and basic navigation
