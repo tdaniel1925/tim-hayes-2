@@ -1,6 +1,6 @@
 # BUILD-STATE.md — AudiaPro Progress Tracker
 
-## Current Status: STEP 1.5
+## Current Status: CP1 (Checkpoint 1)
 
 ## Progress
 
@@ -11,7 +11,8 @@
 | 1.2 | Database Schema & Migrations | ✅ | ✅ | 2026-02-22 |
 | 1.3 | RLS Policies | ✅ | ✅ | 2026-02-22 |
 | 1.4 | Supabase Client Setup | ✅ | ✅ | 2026-02-22 |
-| 1.5 | Encryption & Error Utilities | ⬜ | ⬜ | |
+| 1.5 | Encryption & Error Utilities | ✅ | ✅ | 2026-02-22 |
+| CP1 | **CHECKPOINT 1: Foundation** | ⬜ | — | |
 | 1.2 | Database Schema & Migrations | ⬜ | ⬜ | |
 | 1.3 | RLS Policies | ⬜ | ⬜ | |
 | 1.4 | Supabase Client Setup | ⬜ | ⬜ | |
