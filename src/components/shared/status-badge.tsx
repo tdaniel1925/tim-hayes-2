@@ -1,6 +1,6 @@
 interface StatusBadgeProps {
   status: string
-  type?: 'status' | 'plan' | 'job_status' | 'job_type'
+  type?: 'status' | 'plan' | 'job_status' | 'job_type' | 'disposition'
 }
 
 const statusColors: Record<string, string> = {
@@ -25,6 +25,12 @@ const statusColors: Record<string, string> = {
   full_pipeline: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
   transcribe_only: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
   analyze_only: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
+
+  // Call dispositions
+  answered: 'bg-green-500/10 text-green-400 border-green-500/20',
+  no_answer: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',
+  busy: 'bg-red-500/10 text-red-400 border-red-500/20',
+  congestion: 'bg-red-500/10 text-red-400 border-red-500/20',
 
   // Connection status
   connected: 'bg-green-500/10 text-green-400 border-green-500/20',
