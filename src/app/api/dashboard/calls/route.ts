@@ -34,10 +34,13 @@ export async function GET(request: NextRequest) {
       queryResult.data
     const offset = (page - 1) * limit
 
-    // Build query
+    // Build query - join with call_analyses to get sentiment
     let query = supabase
       .from('cdr_records')
-      .select('*', { count: 'exact' })
+      .select(`
+        *,
+        call_analyses(sentiment_overall, sentiment_score)
+      `, { count: 'exact' })
       .eq('tenant_id', tenantId)
       .order('start_time', { ascending: false })
 
