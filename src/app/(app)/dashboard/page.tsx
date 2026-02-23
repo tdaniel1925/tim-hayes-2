@@ -1,49 +1,28 @@
-'use client'
-
-import { useUser } from '@/lib/context/user-context'
-import { LogoutButton } from '@/components/logout-button'
-
 export default function DashboardPage() {
-  const user = useUser()
-
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0F1117]">
-      <div className="text-center">
-        <h1 className="text-2xl font-semibold text-white mb-2">Client Dashboard</h1>
-        <p className="text-sm text-gray-400 mb-4">You are logged in as a client user</p>
+    <div className="p-8">
+      <div>
+        <h1 className="text-2xl font-semibold text-white mb-2">Dashboard</h1>
+        <p className="text-sm text-gray-400">Welcome to your dashboard</p>
+      </div>
 
-        <div className="bg-[#1A1D24] border border-gray-800 rounded-lg p-6 mt-8 text-left max-w-md">
-          <h2 className="text-sm font-medium text-gray-300 mb-4">User Info (from useUser hook):</h2>
-          <div className="space-y-2 text-sm">
-            <div>
-              <span className="text-gray-500">ID:</span>{' '}
-              <span className="text-white font-mono">{user.id}</span>
-            </div>
-            <div>
-              <span className="text-gray-500">Email:</span>{' '}
-              <span className="text-white">{user.email}</span>
-            </div>
-            <div>
-              <span className="text-gray-500">Role:</span>{' '}
-              <span className="text-[#FF7F50]">{user.role}</span>
-            </div>
-            <div>
-              <span className="text-gray-500">Tenant ID:</span>{' '}
-              <span className="text-white font-mono">{user.tenantId || 'null'}</span>
-            </div>
-            <div>
-              <span className="text-gray-500">Full Name:</span>{' '}
-              <span className="text-white">{user.fullName || 'N/A'}</span>
-            </div>
-            <div>
-              <span className="text-gray-500">Active:</span>{' '}
-              <span className="text-white">{user.isActive ? 'Yes' : 'No'}</span>
-            </div>
-          </div>
+      <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {/* Placeholder cards */}
+        <div className="bg-[#1A1D24] border border-gray-800 rounded-lg p-6">
+          <p className="text-sm text-gray-400">Total Calls</p>
+          <p className="text-3xl font-semibold text-white mt-2">5</p>
         </div>
-
-        <div className="mt-8">
-          <LogoutButton />
+        <div className="bg-[#1A1D24] border border-gray-800 rounded-lg p-6">
+          <p className="text-sm text-gray-400">Avg Call Duration</p>
+          <p className="text-3xl font-semibold text-white mt-2">4:10</p>
+        </div>
+        <div className="bg-[#1A1D24] border border-gray-800 rounded-lg p-6">
+          <p className="text-sm text-gray-400">Positive Sentiment</p>
+          <p className="text-3xl font-semibold text-[#4ADE80] mt-2">40%</p>
+        </div>
+        <div className="bg-[#1A1D24] border border-gray-800 rounded-lg p-6">
+          <p className="text-sm text-gray-400">Negative Sentiment</p>
+          <p className="text-3xl font-semibold text-[#EF4444] mt-2">20%</p>
         </div>
       </div>
     </div>
