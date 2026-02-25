@@ -166,7 +166,7 @@ export function DataTable<T extends { id: string }>({
               >
                 {columns.map((column) => (
                   <td key={column.key} className={`px-4 py-4 text-[13px] text-[#F5F5F7] ${getAlignClass(column.align)}`}>
-                    {column.render ? column.render(item) : (item as any)[column.key]}
+                    {column.render ? column.render(item) : (item as Record<string, unknown>)[column.key] as string}
                   </td>
                 ))}
               </tr>

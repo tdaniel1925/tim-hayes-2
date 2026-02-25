@@ -4,10 +4,21 @@ import { useState, useEffect } from 'react'
 import { X, Check, AlertCircle } from 'lucide-react'
 import { toast } from 'sonner'
 
+interface Tenant {
+  id: string
+  name: string
+  slug: string
+  status: string
+  billing_plan: string
+  calls_processed: number
+  created_at: string
+  [key: string]: unknown
+}
+
 interface CreateTenantModalProps {
   isOpen: boolean
   onClose: () => void
-  onSuccess: (tenant: any) => void
+  onSuccess: (tenant: Tenant) => void
 }
 
 export function CreateTenantModal({ isOpen, onClose, onSuccess }: CreateTenantModalProps) {
@@ -53,7 +64,7 @@ export function CreateTenantModal({ isOpen, onClose, onSuccess }: CreateTenantMo
       const data = await response.json()
 
       // Check if any tenant has this exact slug
-      const exists = data.data?.some((tenant: any) => tenant.slug === slugToCheck)
+      const exists = data.data?.some((tenant: { slug: string }) => tenant.slug === slugToCheck)
       setSlugAvailable(!exists)
     } catch (error) {
       console.error('Error checking slug:', error)

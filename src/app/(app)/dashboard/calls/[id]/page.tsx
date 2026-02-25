@@ -42,11 +42,11 @@ interface CallAnalysis {
   talk_time_caller_seconds: number | null
   talk_time_agent_seconds: number | null
   silence_seconds: number | null
-  keywords: any
-  topics: any
-  action_items: any
+  keywords: string[] | null
+  topics: string[] | null
+  action_items: string[] | null
   compliance_score: number | null
-  compliance_flags: any
+  compliance_flags: string[] | null
   escalation_risk: string | null
   escalation_reasons: string[] | null
 }

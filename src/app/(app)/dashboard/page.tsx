@@ -33,7 +33,10 @@ interface Call {
   call_direction: 'inbound' | 'outbound' | 'internal'
   duration_seconds: number | null
   start_time: string
-  call_analyses?: any
+  call_analyses?: {
+    sentiment_overall: string | null
+    sentiment_score: number | null
+  } | null
 }
 
 export default function DashboardPage() {

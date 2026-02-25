@@ -10,10 +10,23 @@ interface Tenant {
   slug: string
 }
 
+interface Connection {
+  id: string
+  name: string
+  tenant_id: string
+  host: string
+  port: number
+  status: 'active' | 'inactive' | 'error'
+  last_connected_at: string | null
+  last_error: string | null
+  created_at: string
+  [key: string]: unknown
+}
+
 interface CreateConnectionModalProps {
   isOpen: boolean
   onClose: () => void
-  onSuccess: (connection: any) => void
+  onSuccess: (connection: Connection) => void
 }
 
 type Step = 1 | 2 | 3 | 4
