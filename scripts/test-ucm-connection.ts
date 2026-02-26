@@ -29,36 +29,59 @@ async function testUCMConnection(config: TestConfig) {
   console.log(`🌐 Attempting to connect to: ${loginUrl}`)
 
   try {
-    const controller = new AbortController()
-    const timeout = setTimeout(() => controller.abort(), 10000)
+    // Use native https module with custom agent
+    const response = await new Promise<{
+      statusCode: number
+      statusMessage: string
+      body: string
+      setCookie?: string
+    }>((resolve, reject) => {
+      const req = https.request(
+        loginUrl,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': loginPayload.length,
+          },
+          agent,
+          timeout: 10000,
+        },
+        (res) => {
+          let body = ''
+          res.on('data', (chunk) => (body += chunk))
+          res.on('end', () => {
+            resolve({
+              statusCode: res.statusCode!,
+              statusMessage: res.statusMessage!,
+              body,
+              setCookie: res.headers['set-cookie']?.[0],
+            })
+          })
+        }
+      )
 
-    const response = await fetch(loginUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: loginPayload,
-      // @ts-ignore
-      agent,
-      signal: controller.signal,
+      req.on('error', reject)
+      req.on('timeout', () => {
+        req.destroy()
+        reject(new Error('Connection timeout'))
+      })
+
+      req.write(loginPayload)
+      req.end()
     })
 
-    clearTimeout(timeout)
+    console.log(`\n📡 Response Status: ${response.statusCode} ${response.statusMessage}`)
+    console.log(`📄 Response Body: ${response.body.substring(0, 200)}...`)
 
-    console.log(`\n📡 Response Status: ${response.status} ${response.statusText}`)
-
-    const responseText = await response.text()
-    console.log(`📄 Response Body: ${responseText.substring(0, 200)}...`)
-
-    if (!response.ok) {
+    if (response.statusCode !== 200) {
       console.log('\n❌ Connection FAILED')
-      console.log(`Error: HTTP ${response.status} - ${response.statusText}`)
+      console.log(`Error: HTTP ${response.statusCode} - ${response.statusMessage}`)
       return
     }
 
-    const setCookie = response.headers.get('set-cookie')
-    if (setCookie) {
-      console.log(`🍪 Session Cookie: ${setCookie.split(';')[0]}`)
+    if (response.setCookie) {
+      console.log(`🍪 Session Cookie: ${response.setCookie.split(';')[0]}`)
       console.log('\n✅ Connection SUCCESSFUL!')
     } else {
       console.log('\n⚠️  Connected but no session cookie received')

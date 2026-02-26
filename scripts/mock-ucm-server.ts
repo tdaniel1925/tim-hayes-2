@@ -3,11 +3,38 @@
  * Simulates UCM API endpoints for testing without real hardware
  */
 
-import { createServer } from 'http'
-import { readFileSync, existsSync } from 'fs'
+import { createServer } from 'https'
+import { readFileSync, existsSync, writeFileSync } from 'fs'
 import { join } from 'path'
+import { execSync } from 'child_process'
 
 const PORT = 8089
+
+// Generate self-signed certificate for HTTPS (like real UCM)
+function generateSelfSignedCert() {
+  const certPath = join(__dirname, 'mock-ucm-cert.pem')
+  const keyPath = join(__dirname, 'mock-ucm-key.pem')
+
+  if (existsSync(certPath) && existsSync(keyPath)) {
+    return { cert: readFileSync(certPath), key: readFileSync(keyPath) }
+  }
+
+  console.log('📝 Generating self-signed certificate for HTTPS...')
+  try {
+    execSync(
+      `openssl req -x509 -newkey rsa:2048 -keyout "${keyPath}" -out "${certPath}" -days 365 -nodes -subj "/CN=localhost"`,
+      { stdio: 'pipe' }
+    )
+    console.log('✅ Certificate generated')
+    return { cert: readFileSync(certPath), key: readFileSync(keyPath) }
+  } catch (error) {
+    console.error('❌ Failed to generate certificate. Using HTTP instead.')
+    console.error('   Install OpenSSL to use HTTPS: https://slproweb.com/products/Win32OpenSSL.html')
+    return null
+  }
+}
+
+const credentials = generateSelfSignedCert()
 const USERNAME = 'admin'
 const PASSWORD = 'admin123'
 
@@ -18,7 +45,7 @@ function generateSessionId(): string {
   return `mock-session-${Date.now()}-${Math.random().toString(36).substring(7)}`
 }
 
-const server = createServer(async (req, res) => {
+const serverHandler = async (req: any, res: any) => {
   // Enable CORS for local development
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
@@ -206,7 +233,12 @@ const server = createServer(async (req, res) => {
       message: 'Method not allowed',
     })
   )
-})
+}
+
+// Create HTTPS server (like real UCM) or fallback to HTTP
+const server = credentials
+  ? createServer(credentials, serverHandler)
+  : require('http').createServer(serverHandler)
 
 /**
  * Generate a minimal WAV file with silence
@@ -259,10 +291,15 @@ setInterval(() => {
 }, 5 * 60 * 1000)
 
 server.listen(PORT, () => {
+  const protocol = credentials ? 'https' : 'http'
   console.log('🎭 Mock Grandstream UCM Server')
-  console.log('=' .repeat(50))
-  console.log(`📡 Listening on: http://localhost:${PORT}`)
-  console.log(`   Also available as: https://localhost:${PORT} (with SSL warnings)`)
+  console.log('='.repeat(50))
+  console.log(`📡 Listening on: ${protocol}://localhost:${PORT}`)
+  if (credentials) {
+    console.log(`   ⚠️  Using self-signed certificate (connection will show SSL warning)`)
+  } else {
+    console.log(`   ⚠️  Using HTTP (install OpenSSL for HTTPS)`)
+  }
   console.log(`\n🔐 Test Credentials:`)
   console.log(`   Username: ${USERNAME}`)
   console.log(`   Password: ${PASSWORD}`)
@@ -276,5 +313,5 @@ server.listen(PORT, () => {
   console.log(`   3. Test the connection via API`)
   console.log(`   4. Use in worker development`)
   console.log(`\n⚠️  Note: This is a MOCK server for development only!`)
-  console.log('=' .repeat(50))
+  console.log('='.repeat(50))
 })
