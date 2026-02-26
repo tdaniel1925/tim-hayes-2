@@ -10,8 +10,12 @@ import type { Json } from '@/lib/supabase/types'
 // GET /api/tenants - List all tenants (super_admin only, paginated)
 export async function GET(request: NextRequest) {
   try {
+    console.log('[GET /api/tenants] Request received')
+
     // Verify super admin access
+    console.log('[GET /api/tenants] Verifying auth...')
     await verifyAuth(['super_admin'])
+    console.log('[GET /api/tenants] Auth verified')
 
     const supabase = await createClient()
     const searchParams = request.nextUrl.searchParams
