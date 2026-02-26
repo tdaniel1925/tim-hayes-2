@@ -32,7 +32,7 @@ export default function DebugPage() {
 
           <div className="mt-6 pt-6 border-t border-[#2E3142]">
             <p className="text-sm text-[#9CA3AF] mb-2">
-              If any values show "NOT SET", the environment variables were not available during build.
+              If any values show &quot;NOT SET&quot;, the environment variables were not available during build.
             </p>
             <p className="text-sm text-[#9CA3AF]">
               Solution: Redeploy from Vercel dashboard with environment variables set.
