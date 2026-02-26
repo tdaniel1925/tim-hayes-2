@@ -35,8 +35,7 @@ export async function middleware(request: NextRequest) {
   // Protected routes that require authentication
   const isProtectedRoute =
     request.nextUrl.pathname.startsWith('/admin') ||
-    request.nextUrl.pathname.startsWith('/dashboard') ||
-    request.nextUrl.pathname.startsWith('/app')
+    request.nextUrl.pathname.startsWith('/dashboard')
 
   // If trying to access protected route without auth, redirect to login
   if (isProtectedRoute && !user) {
@@ -46,21 +45,10 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
-  // If logged in and trying to access login page, redirect to appropriate dashboard
+  // If logged in and trying to access login page, redirect to /admin (default dashboard)
+  // The page will handle role-based routing from there
   if (request.nextUrl.pathname === '/login' && user) {
-    // Get user role to determine redirect
-    const { data: userProfile } = await supabase
-      .from('users')
-      .select('role')
-      .eq('id', user.id)
-      .single()
-
-    const redirectUrl =
-      userProfile?.role === 'super_admin'
-        ? new URL('/admin/tenants', request.url)
-        : new URL('/dashboard/overview', request.url)
-
-    return NextResponse.redirect(redirectUrl)
+    return NextResponse.redirect(new URL('/admin', request.url))
   }
 
   return supabaseResponse
