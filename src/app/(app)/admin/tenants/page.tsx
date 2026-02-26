@@ -85,7 +85,7 @@ export default function TenantsPage() {
       align: 'right',
       sortable: true,
       render: (tenant) => (
-        <span className="font-medium tabular-nums">{formatNumber(tenant.calls_processed)}</span>
+        <span className="font-medium tabular-nums">{formatNumber(tenant.calls_processed || 0)}</span>
       ),
     },
     {
