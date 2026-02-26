@@ -25,7 +25,12 @@ export async function GET(request: NextRequest) {
     })
 
     if (!queryResult.success) {
-      createError(VALIDATION_ERRORS.INVALID_INPUT, queryResult.error.errors[0].message)
+      const errorMsg = queryResult.error.errors[0].message
+      console.error('Query validation failed:', errorMsg, queryResult.error.errors)
+      return NextResponse.json(
+        { error: errorMsg, code: VALIDATION_ERRORS.INVALID_INPUT },
+        { status: 400 }
+      )
     }
 
     const { page, limit, status, search } = queryResult.data
