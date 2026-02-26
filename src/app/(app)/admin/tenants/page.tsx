@@ -139,9 +139,13 @@ export default function TenantsPage() {
   }
 
   // Handle tenant creation success
-  const handleTenantCreated = (newTenant: Tenant) => {
+  const handleTenantCreated = async (newTenant: Tenant) => {
+    // Close modal first
+    setIsModalOpen(false)
+    // Small delay to ensure database has committed
+    await new Promise(resolve => setTimeout(resolve, 500))
     // Refresh the list
-    fetchTenants(1, pagination.limit)
+    await fetchTenants(1, pagination.limit)
   }
 
   // Handle row click

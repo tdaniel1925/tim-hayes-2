@@ -137,7 +137,7 @@ export function CreateTenantModal({ isOpen, onClose, onSuccess }: CreateTenantMo
 
       const newTenant = await response.json()
       toast.success('Tenant created successfully')
-      onSuccess(newTenant)
+      await onSuccess(newTenant)
       handleClose()
     } catch (error) {
       console.error('Error creating tenant:', error)
