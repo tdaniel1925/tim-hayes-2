@@ -29,9 +29,9 @@ export function AppShell({ children, onToggleSidebar }: AppShellProps) {
   const pageTitle = pageTitles[pathname] || 'AudiaPro'
 
   return (
-    <div className="flex h-screen flex-col overflow-hidden">
+    <div className="flex h-screen flex-col overflow-hidden w-full">
       <TopBar title={pageTitle} onToggleSidebar={onToggleSidebar} />
-      <main className="flex-1 overflow-y-auto bg-[#0F1117] p-6">{children}</main>
+      <main className="flex-1 overflow-y-auto bg-[#0F1117] p-6 w-full">{children}</main>
     </div>
   )
 }

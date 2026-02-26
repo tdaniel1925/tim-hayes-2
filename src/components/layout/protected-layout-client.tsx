@@ -34,9 +34,11 @@ export function ProtectedLayoutClient({ children }: ProtectedLayoutClientProps) 
   }
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen overflow-hidden w-full">
       <Sidebar isCollapsed={isSidebarCollapsed} />
-      <AppShell onToggleSidebar={toggleSidebar}>{children}</AppShell>
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <AppShell onToggleSidebar={toggleSidebar}>{children}</AppShell>
+      </div>
     </div>
   )
 }
