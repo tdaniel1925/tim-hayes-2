@@ -228,8 +228,13 @@ export default function ConnectionsPage() {
   }
 
   // Handle connection created
-  const handleConnectionCreated = (newConnection: Connection) => {
-    fetchConnections(1, pagination.limit)
+  const handleConnectionCreated = async (newConnection: Connection) => {
+    // Close modal first
+    setIsModalOpen(false)
+    // Small delay to ensure database has committed
+    await new Promise(resolve => setTimeout(resolve, 500))
+    // Refresh the list
+    await fetchConnections(1, pagination.limit)
   }
 
   // Handle row click
