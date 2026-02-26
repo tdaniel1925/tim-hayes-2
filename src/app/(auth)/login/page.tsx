@@ -28,7 +28,8 @@ export default function LoginPage() {
       })
 
       if (authError) {
-        setError('Invalid email or password')
+        console.error('Auth error:', authError)
+        setError(`Authentication failed: ${authError.message}`)
         setIsLoading(false)
         return
       }
