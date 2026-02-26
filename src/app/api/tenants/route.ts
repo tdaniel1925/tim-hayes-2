@@ -20,12 +20,12 @@ export async function GET(request: NextRequest) {
     const supabase = await createClient()
     const searchParams = request.nextUrl.searchParams
 
-    // Validate query parameters
+    // Validate query parameters (convert null to undefined for optional fields)
     const queryResult = ListTenantsQuerySchema.safeParse({
-      page: searchParams.get('page'),
-      limit: searchParams.get('limit'),
-      status: searchParams.get('status'),
-      search: searchParams.get('search'),
+      page: searchParams.get('page') ?? undefined,
+      limit: searchParams.get('limit') ?? undefined,
+      status: searchParams.get('status') ?? undefined,
+      search: searchParams.get('search') ?? undefined,
     })
 
     if (!queryResult.success) {
