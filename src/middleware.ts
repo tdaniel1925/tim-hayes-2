@@ -48,9 +48,19 @@ export async function middleware(request: NextRequest) {
 
   // If logged in and trying to access login page, redirect to appropriate dashboard
   if (request.nextUrl.pathname === '/login' && user) {
-    // We'll determine role in the login page itself and redirect appropriately
-    // For now, just redirect to root which will handle routing
-    return NextResponse.redirect(new URL('/', request.url))
+    // Get user role to determine redirect
+    const { data: userProfile } = await supabase
+      .from('users')
+      .select('role')
+      .eq('id', user.id)
+      .single()
+
+    const redirectUrl =
+      userProfile?.role === 'super_admin'
+        ? new URL('/admin/tenants', request.url)
+        : new URL('/dashboard/overview', request.url)
+
+    return NextResponse.redirect(redirectUrl)
   }
 
   return supabaseResponse
