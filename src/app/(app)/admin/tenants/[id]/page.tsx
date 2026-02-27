@@ -2,7 +2,8 @@
 
 import { useState, useEffect, use } from 'react'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, Plus, UserCheck, UserX, Loader2 } from 'lucide-react'
+import Link from 'next/link'
+import { ArrowLeft, Plus, UserCheck, UserX, Loader2, Phone, ArrowRight } from 'lucide-react'
 import { toast } from 'sonner'
 import { DataTable, Column, PaginationData } from '@/components/shared/data-table'
 import { StatusBadge } from '@/components/shared/status-badge'
@@ -409,6 +410,32 @@ export default function TenantDetailPage({ params }: { params: Promise<{ id: str
               {formatStorageSize(tenant.storage_bytes_total)}
             </p>
           )}
+        </div>
+      </div>
+
+      {/* Quick Actions */}
+      <div className="bg-[#1A1D27] border border-[#2E3142] rounded-lg p-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="p-3 bg-[#FF7F50]/10 rounded-lg">
+              <Phone className="h-6 w-6 text-[#FF7F50]" />
+            </div>
+            <div>
+              <h3 className="text-[15px] font-semibold text-[#F5F5F7]">Call Records</h3>
+              <p className="text-[13px] text-[#9CA3AF] mt-0.5">
+                {tenant.calls_processed_total === 0
+                  ? 'No calls processed yet'
+                  : `${tenant.calls_processed_total.toLocaleString()} call${tenant.calls_processed_total !== 1 ? 's' : ''} processed`}
+              </p>
+            </div>
+          </div>
+          <Link
+            href={`/admin/calls?tenant_id=${id}`}
+            className="flex items-center gap-2 px-4 py-2 bg-[#0F1117] border border-[#2E3142] text-[#F5F5F7] text-[13px] font-medium rounded-md hover:bg-[#1A1D27] transition-colors"
+          >
+            View All Calls
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
 
