@@ -36,6 +36,7 @@ export function Sidebar({ isCollapsed = false }: SidebarProps) {
           { href: '/admin', label: 'Dashboard', icon: <LayoutDashboard className="h-5 w-5" /> },
           { href: '/admin/tenants', label: 'Tenants', icon: <Building2 className="h-5 w-5" /> },
           { href: '/admin/connections', label: 'Connections', icon: <Cable className="h-5 w-5" /> },
+          { href: '/admin/calls', label: 'Calls', icon: <Phone className="h-5 w-5" /> },
           { href: '/admin/jobs', label: 'Jobs', icon: <ListChecks className="h-5 w-5" /> },
           { href: '/admin/stats', label: 'Stats', icon: <BarChart3 className="h-5 w-5" /> },
         ]

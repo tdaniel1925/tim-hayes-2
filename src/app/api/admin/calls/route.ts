@@ -43,10 +43,14 @@ export async function GET(request: NextRequest) {
     } = queryResult.data
     const offset = (page - 1) * limit
 
-    // Build query - select with tenant info for admin view
+    // Build query - select with tenant info and call analyses for admin view
     let query = supabase
       .from('cdr_records')
-      .select('*, tenants(name, slug)', { count: 'exact' })
+      .select(`
+        *,
+        tenants(name, slug),
+        call_analyses(sentiment_overall, sentiment_score)
+      `, { count: 'exact' })
       .order('start_time', { ascending: false })
 
     // Apply filters
