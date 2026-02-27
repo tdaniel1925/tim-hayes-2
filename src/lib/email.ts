@@ -1,16 +1,24 @@
 import { Resend } from 'resend'
 
-if (!process.env.RESEND_API_KEY) {
-  throw new Error('RESEND_API_KEY environment variable is not set')
+// Lazy initialize Resend client to avoid build-time errors
+let resendInstance: Resend | null = null
+
+function getResend(): Resend {
+  if (!resendInstance) {
+    if (!process.env.RESEND_API_KEY) {
+      throw new Error('RESEND_API_KEY environment variable is not set')
+    }
+    resendInstance = new Resend(process.env.RESEND_API_KEY)
+  }
+  return resendInstance
 }
 
-if (!process.env.RESEND_FROM_EMAIL) {
-  throw new Error('RESEND_FROM_EMAIL environment variable is not set')
+function getFromEmail(): string {
+  if (!process.env.RESEND_FROM_EMAIL) {
+    throw new Error('RESEND_FROM_EMAIL environment variable is not set')
+  }
+  return process.env.RESEND_FROM_EMAIL
 }
-
-export const resend = new Resend(process.env.RESEND_API_KEY)
-
-export const FROM_EMAIL = process.env.RESEND_FROM_EMAIL
 
 /**
  * Send a weekly report email to a user
@@ -43,8 +51,11 @@ export async function sendWeeklyReport({
     unsubscribeUrl,
   })
 
+  const resend = getResend()
+  const fromEmail = getFromEmail()
+
   const result = await resend.emails.send({
-    from: FROM_EMAIL,
+    from: fromEmail,
     to,
     subject: `${tenantName} - Weekly Call Analytics Report`,
     html,
