@@ -24,20 +24,10 @@ export async function POST(request: NextRequest) {
     console.log('='.repeat(80))
     console.log('TEST WEBHOOK RECEIVED FROM CLOUDUCM')
     console.log('='.repeat(80))
+    console.log('Timestamp:', new Date().toISOString())
     console.log('Headers:', JSON.stringify(headers, null, 2))
     console.log('Body:', JSON.stringify(body, null, 2))
     console.log('='.repeat(80))
-
-    // Store in database for debugging (best effort - don't fail if table doesn't exist)
-    try {
-      await supabase.from('test_webhook_logs').insert({
-        headers: headers,
-        body: body,
-        received_at: new Date().toISOString(),
-      })
-    } catch (dbError) {
-      console.log('Note: Could not write to test_webhook_logs table (may not exist):', dbError)
-    }
 
     // Also try to create a CDR record if it looks like valid webhook data
     if (body.uniqueid && body.src && body.dst) {
