@@ -66,7 +66,7 @@ const serverHandler = async (req: any, res: any) => {
   // Handle POST requests (login, etc.)
   if (req.method === 'POST') {
     let body = ''
-    req.on('data', (chunk) => {
+    req.on('data', (chunk: Buffer) => {
       body += chunk.toString()
     })
 
